@@ -57,7 +57,17 @@ const GRAVITY = 0.6; // downward force added to vy every frame
 let blobT = 0;
 
 // Platform colour stored as an array so it can be reused easily
-const PLATFORM_COLOR = [140, 0, 191]; // purple (NEW COLOUR)
+const PLATFORM_COLOR = [245, 232, 170]; // butter yellow (NEW COLOUR)
+
+// ------------------------------------------------------------
+// IMAGES
+// Adding background image to make the game more visually interesting.
+// ------------------------------------------------------------
+let myImage;
+
+function preload() {
+  myImage = loadImage("assets/images/Sakura Tree.png"); 
+}
 
 // ============================================================
 // setup()
@@ -66,6 +76,7 @@ const PLATFORM_COLOR = [140, 0, 191]; // purple (NEW COLOUR)
 // ============================================================
 function setup() {
   createCanvas(800, 450);
+
 
   // Place player on top of the ground platform (index 0 in the array)
   player.y = platforms[0].y - player.r;
@@ -78,8 +89,7 @@ function setup() {
 // apply physics, resolve collisions, and draw everything.
 // ============================================================
 function draw() {
-  background(10);
-
+  image(myImage, 0, 0, width, height);
   handleInput();
   applyPhysics();
   resolvePlatformCollisions();
@@ -208,6 +218,20 @@ function resolvePlatformCollisions() {
       player.vy = 0;                 // stop falling
       player.onGround = true;        // allow jumping again
     }
+    // Bounce platform behavior
+    if (p.type === "bounce" && overlapsHorizontally && landingOnTop) {
+
+      // Squish the platform downward
+      p.y += 6;
+
+      // Pop back up after a short delay
+      setTimeout(() => {
+      p.y -= 6;
+      }, 120);
+
+      // Launch the player upward
+      player.vy = p.bounceStrength;
+    }
   }
 }
 
@@ -218,7 +242,11 @@ function resolvePlatformCollisions() {
 // of objects — enemies, coins, tiles, etc.
 // ------------------------------------------------------------
 function drawPlatforms() {
+  if (p.type === "bounce") {
+  fill(245, 232, 170); // butter yellow (NEW COLOUR)
+} else {
   fill(PLATFORM_COLOR[0], PLATFORM_COLOR[1], PLATFORM_COLOR[2]);
+}
   noStroke();
 
   for (let i = 0; i < platforms.length; i++) {
@@ -237,7 +265,7 @@ function drawPlatforms() {
 function drawPlayer() {
   push(); // save current drawing settings
 
-  fill(0, 200, 180); // teal
+  fill(173, 216, 230); // light blue
   noStroke();
 
   beginShape();
