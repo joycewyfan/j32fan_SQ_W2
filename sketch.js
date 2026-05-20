@@ -302,7 +302,7 @@ function drawPlayer() {
 // how to interact without needing external instructions.
 // ------------------------------------------------------------
 function drawHUD() {
-  fill(180);
+  fill(225); // white
   noStroke();
   textSize(13);
   textAlign(LEFT);
