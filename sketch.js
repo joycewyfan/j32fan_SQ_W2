@@ -21,7 +21,7 @@ let platforms = [
   { x: 140, y: 110, w: 100, h: 16 }, // left high platform
   { x: 360, y: 320, w: 110, h: 16 }, // centre low platform
   { x: 620, y: 290, w: 130, h: 16 }, // far right platform
-  { x: 530, y: 350, w: 100, h: 16, type: "bounce", bounceStrength: -16 }, // added new platform (Bouncing platform)
+  { x: 530, y: 350, w: 100, h: 16, type: "bounce", bounceStrength: -18 }, // added new platform (Bouncing platform)
 ];
 
 // ------------------------------------------------------------
