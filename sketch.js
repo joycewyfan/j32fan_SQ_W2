@@ -242,15 +242,17 @@ function resolvePlatformCollisions() {
 // of objects — enemies, coins, tiles, etc.
 // ------------------------------------------------------------
 function drawPlatforms() {
-  if (p.type === "bounce") {
-  fill(245, 232, 170); // butter yellow (NEW COLOUR)
-} else {
-  fill(PLATFORM_COLOR[0], PLATFORM_COLOR[1], PLATFORM_COLOR[2]);
-}
   noStroke();
 
   for (let i = 0; i < platforms.length; i++) {
     let p = platforms[i];
+    
+    if (p.type === "bounce") {
+      fill(245, 232, 170); // butter yellow (NEW COLOUR)
+    } else {
+      fill(PLATFORM_COLOR[0], PLATFORM_COLOR[1], PLATFORM_COLOR[2]);
+    }
+    
     rect(p.x, p.y, p.w, p.h, 6); // rounded corners
   }
 }
